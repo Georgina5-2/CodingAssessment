@@ -1,0 +1,147 @@
+#highscores
+{
+    margin-left: 0px;
+    padding-top: 5px;
+    padding-left: 5px;
+    float:left;
+    font-size:medium;
+    color: rgb(208, 127, 208);
+}
+
+#time
+{
+    margin-right: 0px;
+    padding-top: 5px;
+    padding-right: 20px;
+    float:right;
+    font-size:medium;
+}
+
+
+.quiz-header
+{
+    font-weight: bolder;
+    font-size:xx-large;
+    text-align: center;
+    padding-top: 60px;
+}
+
+
+.quiz-rules
+{
+    font-size:large;
+    text-align:center;
+    text-indent: 3in;
+    padding-top:30px;
+    -ms-flex-align: center;
+}
+
+
+.startquiz
+{
+    display: flex;
+    flex-direction: column;
+}
+    
+.quiz-start-button
+{
+    margin-top: 20px;
+    text-align: center;
+}
+
+/* .quiz-button
+{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    height: 50px;
+   
+    
+} */
+
+.btnSubmit
+{ 
+    background-color: blueviolet;
+    color:whitesmoke;
+    
+}
+
+.btnSubmit:hover
+{
+    opacity: 70%;
+}
+
+/* .multiple-choice
+{
+    content-visibility: hidden;
+} */
+
+.flex-multi-choice
+{
+    display:flex;
+    flex-direction: column;
+    
+    padding-top: 60px;
+ 
+    align-items: flex-start;
+    padding-left: 27%;
+    padding-right: 27%;
+    content-visibility: hidden;
+}
+
+
+.flex-multi-choice .question
+ {
+    font-weight: bolder;
+    font-size:xx-large;
+    line-height: normal;
+ }
+
+
+ .flex-multi-choice .choice 
+ {
+    
+    margin-top: 20px;
+ }
+
+ 
+ .flex-multi-choice .choice:hover
+ {
+    opacity: 70%;
+    cursor: pointer;
+ }
+
+ 
+ 
+ .flex-multi-choice .choice span
+ {
+    font-size: larger;
+    color:whitesmoke;
+    background-color: purple;
+    margin-top: 10px;
+    padding:5px;
+ }
+
+
+
+ hr {
+    display: block;
+    width:825px;
+    height: 3px;
+    border: 0;
+    border-top: 1px solid gray;
+    margin: 2em 0;
+    padding-left: 27%;
+    padding-right: 27%;
+    content-visibility: hidden;
+    
+}
+
+/* .flex-multi-choice .line
+{
+    content-visibility: hidden;
+} */
+
+
+
