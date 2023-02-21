@@ -15,7 +15,7 @@
             <h4>View highscores</h4>
         </section>
         <section id="time">
-            <h4>Time : 0</h4>
+            <p>Time : <span id="time-left"></span></p>
         </section>
     </header>
     <main>
@@ -45,6 +45,16 @@
         </section>
             <input type="hidden" id="userAnswer" >
             <input type="hidden" id="correctAnswer" >
+        <section class="input-initials">
+            <p class="resultHeading"><h1>All done!</h1></p>
+            <p id="finalScore"></p>
+            <p>Enter initials:
+                <input type="text" id="typeInitials">
+                <button type="submit" id="btninitialsSubmit">Submit</button>
+            </p>
+
+            <p></p>
+        </section>
     </main>
 </body>
 <script src="startquiz.js"></script>

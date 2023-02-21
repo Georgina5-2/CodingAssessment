@@ -47,8 +47,10 @@ var questions=
 var multiChoice=document.querySelector('.flex-multi-choice');
 var questionElement=document.querySelector('.flex-multi-choice .question');
 var choiceElements=document.querySelectorAll('.flex-multi-choice .choice');
+var inputInitials=document.querySelector('.input-initials');
 
 function InitiateQuiz(event) {
+
     quizRules.setAttribute("style","content-visibility:hidden");
     multiChoice.setAttribute("style","content-visibility:visible");
     setMultipleChoiceQuestion(0);
@@ -57,7 +59,7 @@ function InitiateQuiz(event) {
 
 function setMultipleChoiceQuestion(index) {
 
-
+    setTime();
     questionElement.innerHTML=questions[index].Question;
     questionElement.setAttribute("data-index", index)
     for(i=0;i<4;i++)
@@ -69,6 +71,35 @@ function setMultipleChoiceQuestion(index) {
     document.getElementById("correctAnswer").value = questions[index].Answer;
 
 }
+
+var secondsLeft = 90;
+var timerInterval;
+
+function setTime() {
+    
+  // Sets interval in variable
+    timerInterval = setInterval(function() 
+    {
+        secondsLeft--;
+         document.getElementById("time-left").innerHTML = secondsLeft ;
+         if(secondsLeft < 0) {
+            // Stops execution of action at set interval
+             clearInterval(timerInterval);
+             multiChoice.setAttribute("style","content-visibility:hidden");
+             inputInitials.setAttribute("style","content-visibility:visible");
+             document.getElementById("finalScore").innerText="Your final score is " + score + ".";
+             if(secondsLeft < 0) {
+                // Stops execution of action at set interval
+                 clearInterval(timerInterval);
+                 multiChoice.setAttribute("style","content-visibility:hidden");
+                 inputInitials.setAttribute("style","content-visibility:visible");
+                 document.getElementById("time-left").innerHTML = 0 ;
+            }
+        }
+},1000);
+ }
+
+
 
   function choiceAction(event) {
 
@@ -97,14 +128,18 @@ function setMultipleChoiceQuestion(index) {
     if (currentIndex < questions.length-1){
     setMultipleChoiceQuestion(currentIndex+1);
     }
+    else{
+       
+        displayResultSection(score);
+    }
   }
 
-  function displayResultSection(score) {
-
-    console.log('Total Score:'+ score);
-    highscoreList.push(score);
-    console.log('Highscores:', highscoreList);
-
+  function displayResultSection(score) 
+  {
+     clearInterval(timerInterval);
+     multiChoice.setAttribute("style","content-visibility:hidden");
+     inputInitials.setAttribute("style","content-visibility:visible");
+     document.getElementById("finalScore").innerText="Your final score is " + score + ".";
   }
 
 
@@ -112,5 +147,5 @@ function setMultipleChoiceQuestion(index) {
   choiceElements.forEach(
     (choice) => choice.addEventListener("click", choiceAction)
   );
-  displayResultSection(score);
+  
   
