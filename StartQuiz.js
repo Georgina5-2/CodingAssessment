@@ -53,13 +53,17 @@ function InitiateQuiz(event) {
 
     quizRules.setAttribute("style","content-visibility:hidden");
     multiChoice.setAttribute("style","content-visibility:visible");
+    // document.getElementById("time-left").innerHTML = secondsLeft ;
+    setTime();
     setMultipleChoiceQuestion(0);
+        
+  
 }
 
 
 function setMultipleChoiceQuestion(index) {
 
-    setTime();
+    
     questionElement.innerHTML=questions[index].Question;
     questionElement.setAttribute("data-index", index)
     for(i=0;i<4;i++)
@@ -69,35 +73,59 @@ function setMultipleChoiceQuestion(index) {
         choiceElements[i].setAttribute("data-choice", displayChoice)
     }
     document.getElementById("correctAnswer").value = questions[index].Answer;
-
+    choiceElements.forEach(
+        (choice) => choice.addEventListener("click", choiceAction)
+      );
 }
 
-var secondsLeft = 90;
+var secondsLeft = 10;
 var timerInterval;
 
 function setTime() {
     
   // Sets interval in variable
-    timerInterval = setInterval(function() 
-    {
-        secondsLeft--;
-         document.getElementById("time-left").innerHTML = secondsLeft ;
-         if(secondsLeft < 0) {
-            // Stops execution of action at set interval
-             clearInterval(timerInterval);
-             multiChoice.setAttribute("style","content-visibility:hidden");
-             inputInitials.setAttribute("style","content-visibility:visible");
-             document.getElementById("finalScore").innerText="Your final score is " + score + ".";
-             if(secondsLeft < 0) {
-                // Stops execution of action at set interval
-                 clearInterval(timerInterval);
-                 multiChoice.setAttribute("style","content-visibility:hidden");
-                 inputInitials.setAttribute("style","content-visibility:visible");
-                 document.getElementById("time-left").innerHTML = 0 ;
-            }
-        }
-},1000);
- }
+    
+    timerInterval = setInterval(function()
+
+    {   
+        
+        document.getElementById("time-left").innerHTML = secondsLeft ;
+        secondsLeft-=1;
+        
+        
+                if(secondsLeft===0)
+                {
+                    
+                    displayResultSection(score);
+                    clearInterval(timerInterval);
+                }
+    },1000); 
+    
+}
+
+// function startTimer()
+    
+//     {
+        
+        
+//         secondsLeft-=1;
+        
+        
+//         if(secondsLeft=== 0)
+//         {
+//             stopTimer();
+//             displayResultSection(score);
+//             document.getElementById("time-left").innerHTML = 0 ;
+//         }
+         
+//     }
+
+
+//  function stopTimer(timerInterval)
+//  {
+//     clearInterval(timerInterval);
+//  }
+
 
 
 
@@ -129,23 +157,26 @@ function setTime() {
     setMultipleChoiceQuestion(currentIndex+1);
     }
     else{
-       
+        clearInterval(timerInterval);
         displayResultSection(score);
     }
   }
 
   function displayResultSection(score) 
   {
-     clearInterval(timerInterval);
+     
      multiChoice.setAttribute("style","content-visibility:hidden");
      inputInitials.setAttribute("style","content-visibility:visible");
      document.getElementById("finalScore").innerText="Your final score is " + score + ".";
-  }
 
+   }
 
-  startQuizButton.addEventListener("click", InitiateQuiz);
-  choiceElements.forEach(
-    (choice) => choice.addEventListener("click", choiceAction)
-  );
+function init(){
+    startQuizButton.addEventListener("click", InitiateQuiz);
+}
+
+init();
+
+  
   
   
