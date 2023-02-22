@@ -1,11 +1,15 @@
 startQuizButton=document.querySelector('.btnSubmit');
 quizRules=document.querySelector('.start-quiz');
 quizButton=document.querySelector('.quiz-start-button');
+submitInitials=document.querySelector('#btnInitialsSubmit');
+getInitials=document.getElementById('typeInitials');
+userDetails=document.querySelector('.input-initials');
 
 
 let score=0;
 var highscore=0;
 var highscoreList=[];
+var initialsAndScore=[];
 
 var questions=
 [
@@ -162,12 +166,31 @@ function setTime() {
     }
   }
 
+  function initialSubmission
+ {
+    if(getInitials.value!==null)
+    {
+        initialsAndScore={
+            Initials:getInitials.value,
+            Score:score
+        };
+        var localStorageUserDetails=localStorage.setItem(JSON.stringify(initialsAndScore));
+        userDetails.setAttribute("style", "content-visibility:hidden");
+        
+    else
+    {
+        alert("Please enter your initials");
+    }
+    
+  }
+
   function displayResultSection(score) 
   {
      
      multiChoice.setAttribute("style","content-visibility:hidden");
      inputInitials.setAttribute("style","content-visibility:visible");
      document.getElementById("finalScore").innerText="Your final score is " + score + ".";
+     submitInitials.addEventListener("click", initialSubmission);
 
    }
 

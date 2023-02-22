@@ -64,6 +64,7 @@
 { 
     background-color: blueviolet;
     color:whitesmoke;
+    width: 100px;
     
 }
 
@@ -138,23 +139,18 @@
     
 }
 
-#btninitialsSubmit{
-    background: blueviolet;
-}
-
-
 .input-initials
 {
     display:flex;
     flex-direction: column;
     align-items: flex-start;
-    justify-content: space-between;
     content-visibility: hidden;
     padding-left: 37%;
     padding-right: 27%;
     padding-top: 60px;
     row-gap: 20px;
 }
+
 
 h1{
     font-size: x-large;
@@ -170,5 +166,45 @@ h1{
 
 .input-initials #btnInitialsSubmit
 {
-    max-width: max-content;
+    width: 70px;
+    background: blueviolet;
+    color: whitesmoke;
+}
+
+.input-initials #typeInitialsSubmit :focus
+{border-color: blue;}
+
+.input-initials #btnInitialsSubmit :focus
+{ border-color: blue;}
+
+.viewHighscores
+{
+    display:flex;
+    flex-direction: column;
+    align-items: flex-start;
+    /* content-visibility: hidden; */
+    padding-left: 37%;
+    padding-right: 27%;
+    padding-top: 60px;
+    row-gap: 20px;
+}
+
+.viewHighscores #highScoreHeading
+{
+    font-weight: bolder;
+    font-size: x-large;
+}
+
+.viewHighscores #goBack
+{
+    background: blueviolet;
+    color: whitesmoke;
+    width: 70px;
+}
+
+.viewHighscores #clearHighScores
+{
+    background: blueviolet;
+    color: whitesmoke;
+    width: 150px;
 }

@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="./Assets/reset.css">
     <link rel="stylesheet" href="./Assets/style.css">
 
-    <title>Document</title>
+    <title>Javascript Quiz</title>
 </head>
 <body>
     <header>
@@ -28,6 +28,7 @@
                 <button type="button" class="btnSubmit">Start Quiz</button>
             </p>
         </section>
+
         <section class="flex-multi-choice">
             <div class="question"></div>
             <div class="choice">
@@ -38,23 +39,32 @@
             </div>
             <div class="choice">
             </div>
-            
             <p id="questionResult">
-                
             </p>
         </section>
+
             <input type="hidden" id="userAnswer" >
             <input type="hidden" id="correctAnswer" >
+
         <section class="input-initials">
             <p class="resultHeading"><h1>All done!</h1></p>
             <p id="finalScore"></p>
-            
             <p>Enter initials:
                 <input type="text" id="typeInitials">
                 <button type="submit" id="btnInitialsSubmit">Submit</button>
             </p>
-           </section>
+        </section>
+
             <p></p>
+        <section class="viewHighScores">
+            <p id="highScoreHeading">Highscores</p>
+            <ul>
+                <li></li>
+            </ul>
+            <p>
+                <button type="button" id="goBack">Go Back</button>
+                <button type="button" id="clearHighScores">Clear Highscores</button>
+            </p>
         </section>
     </main>
 </body>
