@@ -6,12 +6,16 @@ getInitials=document.getElementById("typeInitials");
 userDetails=document.querySelector('.input-initials');
 usersAndHighScores=document.querySelector('.viewHighScores');
 usersList=document.querySelector('.allScores');
+goBack=document.getElementById("btnGoBack");
+clearHighScores=document.getElementById("btnClearHighScores");
+
 
 let score=0;
 var highscore=0;
 var highscoreList=[];
 var initialsAndScore=[];
 var userDetailsObject=[];
+var scores;
 
 var questions=
 [
@@ -160,17 +164,34 @@ function choiceAction(event) {
         usersAndHighScores.setAttribute("style", "content-visibility:visible");
         userDetailsObject=JSON.parse(localStorage.getItem("localStorageUserDetails"));
         for(i=0;i<userDetailsObject.length;i++)
-        {
-            
+        {   
             usersList.innerHTML+='<li>'+ (i+1) + '.' + userDetailsObject[i].Initials + '-' + userDetailsObject[i].Score + '</li>';
         }
+    
+    
     }
     else
     {
         alert("Please enter your initials");
     }
-    
+
+}    
+
+
+
+   
+
+function ClearHighScoresClick()  {
+        
+    localStorage.clear();
+   usersList.innerHTML="";
 }
+
+ function GoBackClick(){
+    usersAndHighScores.setAttribute("style", "content-visibility:hidden");
+    quizRules.setAttribute("style", "content-visibility:visible");
+ }
+
 
   function displayResultSection(score) 
   {

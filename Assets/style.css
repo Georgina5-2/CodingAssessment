@@ -197,13 +197,13 @@ h1{
     font-size: x-large;
 }
 
-.viewHighScores #goBack
+.viewHighScores #btnGoBack
 {
     background: blueviolet;
     color: whitesmoke;
     width: 70px;
 }
-.viewHighScores #clearHighScores
+.viewHighScores #btnClearHighScores
 {
     background: blueviolet;
     color: whitesmoke;
