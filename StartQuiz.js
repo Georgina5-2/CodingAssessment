@@ -8,7 +8,9 @@ usersAndHighScores=document.querySelector('.viewHighScores');
 usersList=document.querySelector('.allScores');
 goBack=document.getElementById("btnGoBack");
 clearHighScores=document.getElementById("btnClearHighScores");
-
+// displayTime=document.querySelector('.time');
+// displayScores=document.querySelector('.highscores');
+headerElement=document.getElementById("headings");
 
 let score=0;
 var highscore=0;
@@ -99,9 +101,9 @@ function setTime() {
 
     {   
         
+        
         document.getElementById("time-left").innerHTML = secondsLeft ;
         secondsLeft-=1;
-        
         
                 if(secondsLeft===0)
                 {
@@ -162,6 +164,9 @@ function choiceAction(event) {
         localStorage.setItem("localStorageUserDetails", JSON.stringify(initialsAndScore));
         userDetails.setAttribute("style", "content-visibility:hidden");
         usersAndHighScores.setAttribute("style", "content-visibility:visible");
+        headerElement.setAttribute("style","content-visibility:hidden");
+        // displayTime.setAttribute("style","content-visibility:hidden");
+
         userDetailsObject=JSON.parse(localStorage.getItem("localStorageUserDetails"));
         for(i=0;i<userDetailsObject.length;i++)
         {   
@@ -190,6 +195,9 @@ function ClearHighScoresClick()  {
  function GoBackClick(){
     usersAndHighScores.setAttribute("style", "content-visibility:hidden");
     quizRules.setAttribute("style", "content-visibility:visible");
+    headerElement.setAttribute("style", "content-visibility:visible");
+    document.getElementById("time-left").innerHTML = "" ;
+
  }
 
 
