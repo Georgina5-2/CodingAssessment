@@ -1,15 +1,17 @@
 startQuizButton=document.querySelector('.btnSubmit');
 quizRules=document.querySelector('.start-quiz');
 quizButton=document.querySelector('.quiz-start-button');
-submitInitials=document.querySelector('#btnInitialsSubmit');
-getInitials=document.getElementById('typeInitials');
+submitInitials=document.getElementById("btnInitialsSubmit");
+getInitials=document.getElementById("typeInitials");
 userDetails=document.querySelector('.input-initials');
-
+usersAndHighScores=document.querySelector('.viewHighScores');
+usersList=document.querySelector('.allScores');
 
 let score=0;
 var highscore=0;
 var highscoreList=[];
 var initialsAndScore=[];
+var userDetailsObject=[];
 
 var questions=
 [
@@ -107,33 +109,8 @@ function setTime() {
     
 }
 
-// function startTimer()
-    
-//     {
-        
-        
-//         secondsLeft-=1;
-        
-        
-//         if(secondsLeft=== 0)
-//         {
-//             stopTimer();
-//             displayResultSection(score);
-//             document.getElementById("time-left").innerHTML = 0 ;
-//         }
-         
-//     }
 
-
-//  function stopTimer(timerInterval)
-//  {
-//     clearInterval(timerInterval);
-//  }
-
-
-
-
-  function choiceAction(event) {
+function choiceAction(event) {
 
 
     var userClickedChoice = this.dataset["choice"];
@@ -166,23 +143,34 @@ function setTime() {
     }
   }
 
-  function initialSubmission
- {
-    if(getInitials.value!==null)
+  function initialSubmission() {  
+    if(getInitials.value)
     {
-        initialsAndScore={
-            Initials:getInitials.value,
-            Score:score
-        };
-        var localStorageUserDetails=localStorage.setItem(JSON.stringify(initialsAndScore));
-        userDetails.setAttribute("style", "content-visibility:hidden");
+        var localInitialsAndScore=JSON.parse(localStorage.getItem("localStorageUserDetails"));
+        initialsAndScore=(localInitialsAndScore)?localInitialsAndScore:[];
+        console.log("initial value in the array", initialsAndScore, typeof initialsAndScore);
+        initialsAndScore.push(
+            {
+            "Initials":getInitials.value,
+            "Score":score
+        });
         
+        localStorage.setItem("localStorageUserDetails", JSON.stringify(initialsAndScore));
+        userDetails.setAttribute("style", "content-visibility:hidden");
+        usersAndHighScores.setAttribute("style", "content-visibility:visible");
+        userDetailsObject=JSON.parse(localStorage.getItem("localStorageUserDetails"));
+        for(i=0;i<userDetailsObject.length;i++)
+        {
+            
+            usersList.innerHTML+='<li>'+ (i+1) + '.' + userDetailsObject[i].Initials + '-' + userDetailsObject[i].Score + '</li>';
+        }
+    }
     else
     {
         alert("Please enter your initials");
     }
     
-  }
+}
 
   function displayResultSection(score) 
   {
@@ -191,6 +179,7 @@ function setTime() {
      inputInitials.setAttribute("style","content-visibility:visible");
      document.getElementById("finalScore").innerText="Your final score is " + score + ".";
      submitInitials.addEventListener("click", initialSubmission);
+
 
    }
 
