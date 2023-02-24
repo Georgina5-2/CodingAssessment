@@ -175,10 +175,6 @@ function choiceAction(event) {
     }
     
 
-    
-
-   
-
 function ClearHighScoresClick()  {
         
    localStorage.clear();
