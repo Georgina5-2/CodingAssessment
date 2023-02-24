@@ -1,4 +1,4 @@
-# Coding_Assessment
+# Coding_Knowledge_Assessment
 ## Quiz for assessing your coding knowledge
 #Description
 ## User Story
