@@ -2,22 +2,14 @@ startQuizButton=document.querySelector('.btnSubmit');
 quizRules=document.querySelector('.start-quiz');
 quizButton=document.querySelector('.quiz-start-button');
 submitInitials=document.getElementById("btnInitialsSubmit");
-getInitials=document.getElementById("typeInitials");
 userDetails=document.querySelector('.input-initials');
 usersAndHighScores=document.querySelector('.viewHighScores');
 usersList=document.querySelector('.allScores');
 goBack=document.getElementById("btnGoBack");
 clearHighScores=document.getElementById("btnClearHighScores");
-// displayTime=document.querySelector('.time');
-// displayScores=document.querySelector('.highscores');
 headerElement=document.getElementById("headings");
 
-let score=0;
-var highscore=0;
-var highscoreList=[];
-var initialsAndScore=[];
-var userDetailsObject=[];
-var scores;
+var score=0;
 
 var questions=
 [
@@ -54,28 +46,22 @@ var questions=
     }
 ];
 
-
-
 var multiChoice=document.querySelector('.flex-multi-choice');
 var questionElement=document.querySelector('.flex-multi-choice .question');
 var choiceElements=document.querySelectorAll('.flex-multi-choice .choice');
 var inputInitials=document.querySelector('.input-initials');
 
-function InitiateQuiz(event) {
 
+function InitiateQuiz(event) {
     quizRules.setAttribute("style","content-visibility:hidden");
     multiChoice.setAttribute("style","content-visibility:visible");
-    // document.getElementById("time-left").innerHTML = secondsLeft ;
     setTime();
+    document.querySelector("#questionResult").innerHTML=""
     setMultipleChoiceQuestion(0);
-        
-  
 }
 
 
 function setMultipleChoiceQuestion(index) {
-
-    
     questionElement.innerHTML=questions[index].Question;
     questionElement.setAttribute("data-index", index)
     for(i=0;i<4;i++)
@@ -90,34 +76,26 @@ function setMultipleChoiceQuestion(index) {
       );
 }
 
-var secondsLeft = 10;
+var secondsLeft = 60;
 var timerInterval;
 
 function setTime() {
-    
-  // Sets interval in variable
-    
+    // Sets interval in variable
     timerInterval = setInterval(function()
-
     {   
-        
-        
         document.getElementById("time-left").innerHTML = secondsLeft ;
         secondsLeft-=1;
-        
-                if(secondsLeft===0)
-                {
+        if(secondsLeft===0)
+            {
                     
-                    displayResultSection(score);
-                    clearInterval(timerInterval);
-                }
+                displayResultSection();
+                clearInterval(timerInterval);
+            }
     },1000); 
-    
 }
 
 
 function choiceAction(event) {
-
 
     var userClickedChoice = this.dataset["choice"];
     var correctAnswer = document.getElementById("correctAnswer").value;
@@ -137,8 +115,6 @@ function choiceAction(event) {
     //   }, 3000);
     console.log('Total Score:', score);
     var currentIndex = parseInt(questionElement.dataset["index"]);
-    console.log('currentIndex', currentIndex)
-    console.log('questions length', questions.length)
 
     if (currentIndex < questions.length-1){
     setMultipleChoiceQuestion(currentIndex+1);
@@ -149,64 +125,84 @@ function choiceAction(event) {
     }
   }
 
-  function initialSubmission() {  
-    if(getInitials.value)
-    {
-        var localInitialsAndScore=JSON.parse(localStorage.getItem("localStorageUserDetails"));
-        initialsAndScore=(localInitialsAndScore)?localInitialsAndScore:[];
-        console.log("initial value in the array", initialsAndScore, typeof initialsAndScore);
-        initialsAndScore.push(
-            {
-            "Initials":getInitials.value,
-            "Score":score
-        });
-        
-        localStorage.setItem("localStorageUserDetails", JSON.stringify(initialsAndScore));
-        userDetails.setAttribute("style", "content-visibility:hidden");
-        usersAndHighScores.setAttribute("style", "content-visibility:visible");
-        headerElement.setAttribute("style","content-visibility:hidden");
-        // displayTime.setAttribute("style","content-visibility:hidden");
+  function initialSubmission() {   
+    var localStorageData
+    var userInput=document.getElementById("typeInitials");
 
-        userDetailsObject=JSON.parse(localStorage.getItem("localStorageUserDetails"));
-        for(i=0;i<userDetailsObject.length;i++)
-        {   
-            usersList.innerHTML+='<li>'+ (i+1) + '.' + userDetailsObject[i].Initials + '-' + userDetailsObject[i].Score + '</li>';
-        }
-    
-    
-    }
-    else
+ 
+    if(userInput.value==="")
     {
         alert("Please enter your initials");
     }
+    else
+    {
 
-}    
+        console.log('userInput :: ', userInput);
 
+        var userObject=  {
+            "Initials":userInput.value,
+            "Score":score
+        };
+        console.log('userObject :: ', userObject);
 
+        localStorageData = JSON.parse(localStorage.getItem("localStorageUserDetails"));
+        console.log("initial value 1 localStorageData", localStorageData, typeof localStorageData);
+        if (!localStorageData) {
+            localStorageData=[];
+        }
+        console.log("initial value 2 localStorageData", localStorageData, typeof localStorageData);
+
+        (localStorageData).push(userObject);
+        
+        localStorage.setItem("localStorageUserDetails", JSON.stringify(localStorageData));
+        userDetails.setAttribute("style", "content-visibility:hidden");
+        usersAndHighScores.setAttribute("style", "content-visibility:visible");
+        headerElement.setAttribute("style","content-visibility:hidden");
+
+       var userDetailsObject=JSON.parse(localStorage.getItem("localStorageUserDetails"));
+        console.log('userDetailsObject :: ', userDetailsObject);
+ 
+            var itemNumber= userDetailsObject.length;
+            var li = document.createElement('li');
+            var listItemText = (itemNumber) + '. ' + userDetailsObject[itemNumber-1].Initials + ' - ' + score;
+            li.appendChild(document.createTextNode(listItemText));
+            usersList.appendChild(li);
+            userDetailsObject = [];
+            console.log('userDetailsObject 2 :: ', userDetailsObject);
+    }
+    userInput.value="";
+
+    }
+    
+
+    
 
    
 
 function ClearHighScoresClick()  {
         
-    localStorage.clear();
+   localStorage.clear();
    usersList.innerHTML="";
+   score=0;
 }
 
  function GoBackClick(){
+    score=0;
     usersAndHighScores.setAttribute("style", "content-visibility:hidden");
     quizRules.setAttribute("style", "content-visibility:visible");
     headerElement.setAttribute("style", "content-visibility:visible");
     document.getElementById("time-left").innerHTML = "" ;
+    
 
  }
 
 
-  function displayResultSection(score) 
+  function displayResultSection() 
   {
      
      multiChoice.setAttribute("style","content-visibility:hidden");
      inputInitials.setAttribute("style","content-visibility:visible");
-     document.getElementById("finalScore").innerText="Your final score is " + score + ".";
+     document.getElementById("finalScore").innerHTML="<strong>Your final score is " + score + ".</strong>";
      submitInitials.addEventListener("click", initialSubmission);
 
 
