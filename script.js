@@ -80,6 +80,7 @@ var secondsLeft = 60;
 var timerInterval;
 
 function setTime() {
+    
     // Sets interval in variable
     timerInterval = setInterval(function()
     {   
@@ -111,7 +112,7 @@ function choiceAction(event) {
         document.querySelector("#questionResult").innerHTML = "<p id='line'><hr></p> <p>Wrong</p>";
     }
     // setTimeout(function() {
-    //     //Dealy for 3 seconds
+    //     //Delay for 3 seconds
     //   }, 3000);
     console.log('Total Score:', score);
     var currentIndex = parseInt(questionElement.dataset["index"]);
@@ -184,6 +185,7 @@ function ClearHighScoresClick()  {
 
  function GoBackClick(){
     score=0;
+    secondsLeft=60;
     usersAndHighScores.setAttribute("style", "content-visibility:hidden");
     quizRules.setAttribute("style", "content-visibility:visible");
     headerElement.setAttribute("style", "content-visibility:visible");
