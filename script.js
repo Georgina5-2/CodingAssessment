@@ -111,9 +111,7 @@ function choiceAction(event) {
         secondsLeft-=10;
         document.querySelector("#questionResult").innerHTML = "<p id='line'><hr></p> <p>Wrong</p>";
     }
-    // setTimeout(function() {
-    //     //Delay for 3 seconds
-    //   }, 3000);
+    
     console.log('Total Score:', score);
     var currentIndex = parseInt(questionElement.dataset["index"]);
 
@@ -121,6 +119,7 @@ function choiceAction(event) {
     setMultipleChoiceQuestion(currentIndex+1);
     }
     else{
+        
         clearInterval(timerInterval);
         displayResultSection(score);
     }
