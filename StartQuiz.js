@@ -107,7 +107,7 @@ function choiceAction(event) {
 
        document.querySelector("#questionResult").innerHTML = "<p id='line'><hr></p> <p>Right</p>";
     } else {
-        
+        secondsLeft-=10;
         document.querySelector("#questionResult").innerHTML = "<p id='line'><hr></p> <p>Wrong</p>";
     }
     // setTimeout(function() {
